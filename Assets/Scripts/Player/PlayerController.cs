@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool dropInput = false;
     public bool dashInput = false;
 
+    public Actions actions;
+
     private Weapon holding;
     public float playerFacing = 1;
     private bool isDashing = false;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator { get; private set; }
     void Start()
     {
+        actions = new Actions(this);
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
