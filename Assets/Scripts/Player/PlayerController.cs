@@ -12,8 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
 
+    public PlayerBaseState currentState { get; private set; }
 
-    private float movementInput;
+    private PlayerBaseState initialState = new IdleState();
+    public PlayerBaseState idleState = new IdleState();
+    public PlayerBaseState movingState = new MovingState();
+    public PlayerBaseState jumpState = new JumpState();
+
+    public float movementInput;
     public bool jumpInput = false;
     public bool actionInput = false;
     public bool attackInput = false;
@@ -23,11 +29,6 @@ public class PlayerController : MonoBehaviour
     public Actions actions;
 
     public Weapon holding;
-    public float playerFacing = 1;
-    private bool isDashing = false;
-    private CountdownTimer dashDurationTimer;
-    private CountdownTimer dashCooldownTimer;
-    private float dashDirection;
 
     public Rigidbody2D rb { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
@@ -40,21 +41,25 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        dashDurationTimer = new CountdownTimer(0.1f);
-        dashCooldownTimer = new CountdownTimer(0.1f);
+        currentState = initialState;
+        currentState.StartState(this);
     }
 
     void Update()
     {
         CheckInput();
-        ApplyActions();
-        SetPlayerDirection();
-        ApplyAnimation();
+        currentState.UpdateState(this);
     }
 
     void FixedUpdate()
     {
-        ApplyMovement();
+        currentState.FixedUpdateState(this);
+    }
+
+    public void ChangeState(PlayerBaseState newState)
+    {
+        currentState = newState;
+        currentState.StartState(this);
     }
 
     private void CheckInput()
@@ -65,35 +70,6 @@ public class PlayerController : MonoBehaviour
         attackInput = Input.GetKey(KeyCode.X);
         dropInput = Input.GetKeyDown(KeyCode.S);
         dashInput = Input.GetKey(KeyCode.C);
-    }
-
-    private void ApplyActions()
-    {
-        actions.Jump();
-        actions.PickUp();
-        actions.Attack();
-        actions.DropWeapon();
-    }
-
-    private void SetPlayerDirection()
-    {
-        if (IsMoving()) playerFacing = movementInput;
-        VisualUtils.setSpriteDirection(spriteRenderer, !IsFacingRight());
-    }
-
-    private void ApplyMovement()
-    {
-        rb.velocity = new Vector2(moveSpeed * movementInput, rb.velocity.y);
-    }
-    private void ApplyAnimation()
-    { 
-        animator.SetBool("isMoving", IsMoving());
-        animator.SetBool("isGrounded", IsGrounded());
-    }
-
-    public bool IsFacingRight()
-    {
-        return playerFacing == 1;
     }
 
     public bool IsMoving()
@@ -116,5 +92,19 @@ public class PlayerController : MonoBehaviour
         return currentWeapon.gameObject.GetComponent<Weapon>();
     }
 
-    
+    public void SetFacing(float direction)
+    {
+        spriteRenderer.flipX = direction == 1;
+    }
+
+    public bool IsFacingRight()
+    {
+        return spriteRenderer.flipX;
+    }
+
+    public float GetFacing()
+    {
+        if (IsFacingRight()) return -1;
+        return 1;
+    }
 }

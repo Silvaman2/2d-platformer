@@ -13,8 +13,7 @@ public class Actions
     public void Jump()
     {
         if (!CanJump()) return;
-
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpHeight);
+        player.ChangeState(player.jumpState);
     }
 
     private bool CanJump()
@@ -25,7 +24,6 @@ public class Actions
     public void PickUp()
     {
         if (!CanPickUp()) return;
-
         player.holding = player.WeaponWithinRange();
         player.holding.holder = player;
     }
@@ -57,5 +55,12 @@ public class Actions
     private bool CanDropWeapon()
     {
         return player.holding && player.dropInput;
+    }
+
+    public void Move()
+    {
+        Rigidbody2D rb = player.rb;
+        rb.velocity = new Vector2(player.moveSpeed * player.movementInput, rb.velocity.y);
+        player.SetFacing(player.movementInput);
     }
 }

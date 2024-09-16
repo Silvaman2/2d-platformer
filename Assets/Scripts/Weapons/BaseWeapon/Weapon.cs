@@ -80,7 +80,7 @@ public abstract class Weapon : MonoBehaviour
 
     public Vector3 getBulletSpawnPoint()
     {
-        return transform.position + new Vector3(bulletOffset.x * holder.playerFacing, bulletOffset.y, 0);
+        return transform.position + new Vector3(bulletOffset.x * -holder.GetFacing(), bulletOffset.y, 0);
     }
 
     protected float getAttackInterval()

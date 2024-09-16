@@ -10,4 +10,6 @@ public abstract class PlayerBaseState
     public abstract void UpdateState(PlayerController player);
     public abstract void FixedUpdateState(PlayerController player);
     public abstract void Actions(PlayerController player);
+
+    public abstract void Animations(PlayerController player);
 }
