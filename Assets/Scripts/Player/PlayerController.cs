@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public Actions actions;
 
-    private Weapon holding;
+    public Weapon holding;
     public float playerFacing = 1;
     private bool isDashing = false;
     private CountdownTimer dashDurationTimer;
@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         ApplyMovement();
-        Dash();
     }
 
     private void CheckInput()
@@ -70,90 +69,10 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyActions()
     {
-        Jump();
-        PickUp();
-        Attack();
-        DropWeapon();
-    }
-
-    public void Jump()
-    {
-        if (!CanJump()) return;
-
-        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
-    }
-
-    private bool CanJump()
-    {
-        return IsGrounded() && jumpInput;
-    }
-
-    public void PickUp()
-    {
-        if (!CanPickUp()) return;
-
-        holding = WeaponWithinRange();
-        holding.holder = this;
-    }
-
-    private bool CanPickUp()
-    {
-        return !holding && WeaponWithinRange() && actionInput;
-    }
-
-    public void Attack()
-    {
-        if (!CanAttack()) return;
-        holding.Attack();
-    }
-
-    private bool CanAttack() {
-        return holding && attackInput;
-    }
-
-    public void DropWeapon()
-    {
-        if (!CanDropWeapon()) return;
-        holding.holder = null;
-        holding = null;
-    }
-
-    private bool CanDropWeapon()
-    {
-        return holding && dropInput;
-    }
-
-    public void Dash()
-    {
-        if (!dashCooldownTimer.hasPassed()) return;
-        if (isDashing)
-        {
-            if (dashDurationTimer.hasPassed())
-            {
-                EndDash();
-                return;
-            }
-
-            rb.velocity = new Vector2(dashSpeed * dashDirection, 0);
-            return;
-        }
-
-        if(dashInput && IsMoving())
-        {
-            InitiateDash();
-        }
-    }
-
-    private void InitiateDash() {
-        isDashing = true;
-        dashDirection = playerFacing;
-        dashDurationTimer = new CountdownTimer(dashDuration);
-    }
-
-    private void EndDash()
-    {
-        isDashing = false;
-        dashCooldownTimer = new CountdownTimer(dashCooldown);
+        actions.Jump();
+        actions.PickUp();
+        actions.Attack();
+        actions.DropWeapon();
     }
 
     private void SetPlayerDirection()
@@ -187,7 +106,7 @@ public class PlayerController : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 1f, LayerMask.GetMask("Ground")).collider;
     }
 
-    private Weapon WeaponWithinRange()
+    public Weapon WeaponWithinRange()
     {
         Collider2D currentWeapon = Physics2D.CircleCast(coll.bounds.center, pickUpRadius, Vector2.zero, 0f, LayerMask.GetMask("Weapons"))
             .collider;
