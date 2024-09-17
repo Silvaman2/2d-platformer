@@ -24,6 +24,7 @@ public class Actions
     public void PickUp()
     {
         if (!CanPickUp()) return;
+        player.animator.SetBool("isHoldingWeapon", true);
         player.holding = player.WeaponWithinRange();
         player.holding.holder = player;
     }
@@ -47,6 +48,7 @@ public class Actions
     public void DropWeapon()
     {
         if (!CanDropWeapon()) return;
+        player.animator.SetBool("isHoldingWeapon", false);
         Weapon heldWeapon = player.holding;
         heldWeapon.holder = null;
         player.holding = null;

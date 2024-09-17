@@ -17,6 +17,8 @@ public class JumpState : PlayerBaseState
             return;
         }
 
+
+        CutOffJump(player);
         Actions(player);
     }
     public override void FixedUpdateState(PlayerController player)
@@ -42,13 +44,14 @@ public class JumpState : PlayerBaseState
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpHeight);
     }
 
-    private bool HasHitGround(PlayerController player)
-    {
-        return player.IsGrounded() && player.rb.velocity.y <= 0;
-    }
-
     private bool IsFalling(PlayerController player)
     {
         return player.rb.velocity.y <= 0;
+    }
+
+    private void CutOffJump(PlayerController player)
+    {
+        if (!player.jumpEndInput) return;
+        player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y / 2);
     }
 }

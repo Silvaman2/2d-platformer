@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class PlayerBaseState
 {
-    public string animationString;
-
     public abstract void StartState(PlayerController player);
     public abstract void UpdateState(PlayerController player);
     public abstract void FixedUpdateState(PlayerController player);

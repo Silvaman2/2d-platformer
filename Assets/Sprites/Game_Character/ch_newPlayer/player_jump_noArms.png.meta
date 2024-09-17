@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 470573f53d149604c9b41c088cb9b75f
+guid: 3331e375d0a7cb8468029aa15e2347a5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: playerSpritesheet_0
+      name: player_jump_noArms_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfb511c7632134245b0b3b090f18ced2
-      internalID: 1967878443
+      spriteID: e763aeee3e2ace5419e7e82d6a43d56f
+      internalID: 1327433014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_1
+      name: player_jump_noArms_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c729e07160158cd498558f3cb30c707e
-      internalID: -454539148
+      spriteID: e356051471b0bcf40b46ca28839d44bb
+      internalID: -861448879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_2
+      name: player_jump_noArms_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8a7611cb96428d4a8568f254e43be76
-      internalID: -1016708142
+      spriteID: 6c63c9dab7b915c489e34c75e601bb89
+      internalID: 1760947771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_3
+      name: player_jump_noArms_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d26768a89352b2448d60733a247a024
-      internalID: 1439345053
+      spriteID: 305710188f28f3441a7cbac2436baf20
+      internalID: -1650931074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_4
+      name: player_jump_noArms_4
       rect:
         serializedVersion: 2
         x: 128
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40cc77d88ebb27644aa72c71a14e385c
-      internalID: -1975838990
+      spriteID: 791688c7744202a43b7b491759cf122a
+      internalID: 1198426774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_5
+      name: player_jump_noArms_5
       rect:
         serializedVersion: 2
         x: 160
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 900f07805bf89a046973c8c1e80ed83a
-      internalID: -50053808
+      spriteID: a64bc742adc771a499a7803e8b53378d
+      internalID: 1454612469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_6
+      name: player_jump_noArms_6
       rect:
         serializedVersion: 2
         x: 192
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f712869c01dd2542a5b75bbec781f14
-      internalID: 1196443122
+      spriteID: 3d5024f229aeafb4183e626c2fc39eeb
+      internalID: -27239918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerSpritesheet_7
+      name: player_jump_noArms_7
       rect:
         serializedVersion: 2
         x: 224
@@ -271,71 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2393631381da8af46acdda8402f03f51
-      internalID: 1192025724
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerSpritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.4375, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0647cf088da6874b882a5a6e93904d7
-      internalID: 1599253872
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerSpritesheet_9
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.4375, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35abf9f51e12c7a4ea0a885e812a32d9
-      internalID: -1255849432
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerSpritesheet_10
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.4375, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80869c1840c85ac4999e13b1ee9572fa
-      internalID: -1488701233
+      spriteID: e66552b99d1db124c902d78e148a355d
+      internalID: -1265325230
       vertices: []
       indices: 
       edges: []
@@ -351,17 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      playerSpritesheet_0: 1967878443
-      playerSpritesheet_1: -454539148
-      playerSpritesheet_10: -1488701233
-      playerSpritesheet_2: -1016708142
-      playerSpritesheet_3: 1439345053
-      playerSpritesheet_4: -1975838990
-      playerSpritesheet_5: -50053808
-      playerSpritesheet_6: 1196443122
-      playerSpritesheet_7: 1192025724
-      playerSpritesheet_8: 1599253872
-      playerSpritesheet_9: -1255849432
+      player_jump_noArms_0: 1327433014
+      player_jump_noArms_1: -861448879
+      player_jump_noArms_2: 1760947771
+      player_jump_noArms_3: -1650931074
+      player_jump_noArms_4: 1198426774
+      player_jump_noArms_5: 1454612469
+      player_jump_noArms_6: -27239918
+      player_jump_noArms_7: -1265325230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

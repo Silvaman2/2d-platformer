@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -180011947
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2057279521, guid: 5fb8f36ae803223439af4de6c2b0ff74, type: 3}
+  m_Sprite: {fileID: 1967878443, guid: 470573f53d149604c9b41c088cb9b75f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,7 +134,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2145685145077247603
 BoxCollider2D:
@@ -194,13 +194,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 80
-  jumpHeight: 200
-  pickUpRadius: 100
+  jumpHeight: 300
+  pickUpRadius: 50
   dashSpeed: 250
   dashDuration: 0.2
   dashCooldown: 0.6
+  animationControllerNoHands: {fileID: 9100000, guid: 5f0dbbfd1b368aa4da00db93faae0352, type: 2}
+  animationControllerHands: {fileID: 9100000, guid: c2e4c90f22993084b8bd1827adfd0927, type: 2}
   movementInput: 0
   jumpInput: 0
+  jumpEndInput: 0
   actionInput: 0
   attackInput: 0
   dropInput: 0

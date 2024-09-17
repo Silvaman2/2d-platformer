@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float dashSpeed;
     [SerializeField] public float dashDuration;
     [SerializeField] public float dashCooldown;
+    [SerializeField] public RuntimeAnimatorController animationControllerNoHands;
+    [SerializeField] public RuntimeAnimatorController animationControllerHands;
 
     public PlayerBaseState currentState { get; private set; }
 
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public float movementInput;
     public bool jumpInput = false;
+    public bool jumpEndInput = false;
     public bool actionInput = false;
     public bool attackInput = false;
     public bool dropInput = false;
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         movementInput = Input.GetAxisRaw("Horizontal");
         jumpInput = Input.GetKeyDown(KeyCode.Z);
+        jumpEndInput = Input.GetKeyUp(KeyCode.Z);
         actionInput = Input.GetKeyDown(KeyCode.X);
         attackInput = Input.GetKey(KeyCode.X);
         dropInput = Input.GetKeyDown(KeyCode.S);
