@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: -180011947
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -476048412, guid: 18a14ec1218dffd47bdc787e1cd55d3d, type: 3}
+  m_Sprite: {fileID: -2057279521, guid: 5fb8f36ae803223439af4de6c2b0ff74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 32, y: 32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -168,18 +168,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.023180962, y: -1.9965515}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.484375, y: 0.5}
+    pivot: {x: 0.4375, y: 0.5}
     oldSize: {x: 32, y: 32}
-    newSize: {x: 0.32, y: 0.32}
+    newSize: {x: 32, y: 32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.072256, y: 28.006897}
+  m_Size: {x: 12, y: 27}
   m_EdgeRadius: 0
 --- !u!114 &2173551458404022308
 MonoBehaviour:
@@ -196,8 +196,13 @@ MonoBehaviour:
   moveSpeed: 80
   jumpHeight: 200
   pickUpRadius: 100
+  dashSpeed: 250
+  dashDuration: 0.2
+  dashCooldown: 0.6
+  movementInput: 0
   jumpInput: 0
   actionInput: 0
   attackInput: 0
+  dropInput: 0
   dashInput: 0
-  playerFacing: 1
+  holding: {fileID: 0}

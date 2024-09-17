@@ -11,25 +11,30 @@ public class JumpState : PlayerBaseState
     }
     public override void UpdateState(PlayerController player)
     {
-        if (HasHitGround(player)) player.ChangeState(player.idleState);
+        if(IsFalling(player))
+        {
+            player.actions.Fall();
+            return;
+        }
 
-
+        Actions(player);
     }
     public override void FixedUpdateState(PlayerController player)
     {
-        player.actions.Move();
-        if (player.movementInput == 0) return;
-        player.SetFacing(player.movementInput);
+        player.actions.Walk();
     }
     public override void Actions(PlayerController player)
     {
         player.actions.DropWeapon();
         player.actions.Attack();
+        player.actions.Dash();
     }
 
     public override void Animations(PlayerController player)
     {
         player.animator.SetBool("isGrounded", false);
+        player.animator.SetBool("isFalling", false);
+        player.animator.SetTrigger("jump");
     }
 
     private void Jump(PlayerController player)
@@ -40,5 +45,10 @@ public class JumpState : PlayerBaseState
     private bool HasHitGround(PlayerController player)
     {
         return player.IsGrounded() && player.rb.velocity.y <= 0;
+    }
+
+    private bool IsFalling(PlayerController player)
+    {
+        return player.rb.velocity.y <= 0;
     }
 }

@@ -31,12 +31,15 @@ public class MovingState : PlayerBaseState
         player.actions.DropWeapon();
         player.actions.Attack();
         player.actions.PickUp();
+        player.actions.Dash();
+        player.actions.Fall();
     }
 
     public override void Animations(PlayerController player)
     {
         player.animator.SetBool("isMoving", true);
         player.animator.SetBool("isGrounded", true);
+        player.animator.SetBool("isFalling", false);
     }
 
     private void Walk(PlayerController player)

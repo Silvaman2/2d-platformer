@@ -23,13 +23,14 @@ public class HoldingState : BaseWeaponState
 
         CalculateTargetPosition(stateManager);
 
-        VisualUtils.setSpriteDirection(stateManager.spriteRenderer, stateManager.holder.IsFacingRight());
+        VisualUtils.setSpriteDirection(stateManager.spriteRenderer, !stateManager.holder.IsFacingRight());
 
         CheckInput(stateManager);
     }
 
     public override void FixedUpdateState(Weapon stateManager)
     {
+        if (!stateManager.holder) return;
         UpdatePosition(stateManager);
     }
 
@@ -63,7 +64,7 @@ public class HoldingState : BaseWeaponState
     private void CalculateTargetPosition(Weapon stateManager)
     {
         Vector2 distance = stateManager.holder.transform.position - stateManager.transform.position;
-        Vector2 recoilVector = new Vector2(stateManager.currentRecoil * -stateManager.holder.GetFacing(), 0);
+        Vector2 recoilVector = new Vector2(stateManager.currentRecoil * stateManager.holder.GetFacing(), 0);
 
         Vector2 targetVelocity = (distance / stateManager.weaponDrag) - recoilVector;
         targetPosition = stateManager.transform.position + new Vector3(targetVelocity.x, targetVelocity.y, 0);
@@ -71,7 +72,7 @@ public class HoldingState : BaseWeaponState
 
     private void UpdatePosition(Weapon stateManager)
     {
-        float playerFacing = stateManager.holder.IsFacingRight() ? 1f : -1f;
+        float playerFacing = stateManager.holder.GetFacing();
         stateManager.transform.position = targetPosition + new Vector3(stateManager.weaponHoldOffset.x * playerFacing, stateManager.weaponHoldOffset.y, 0f);
     }
 

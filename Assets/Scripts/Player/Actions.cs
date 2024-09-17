@@ -57,10 +57,33 @@ public class Actions
         return player.holding && player.dropInput;
     }
 
+    public void Dash()
+    {
+        if (!CanDash()) return;
+        player.ChangeState(player.dashState);
+    }
+
+    private bool CanDash()
+    {
+        return player.IsMoving() && player.dashInput && player.dashCooldownTimer.hasPassed();
+    }
+
     public void Move()
     {
         Rigidbody2D rb = player.rb;
         rb.velocity = new Vector2(player.moveSpeed * player.movementInput, rb.velocity.y);
+    }
+
+    public void Walk()
+    {
+        Move();
+        if (player.movementInput == 0) return;
         player.SetFacing(player.movementInput);
+    }
+
+    public void Fall()
+    {
+        if (player.IsGrounded()) return;
+        player.ChangeState(player.fallingState);
     }
 }

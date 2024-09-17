@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,8 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float jumpHeight;
     [SerializeField] public float pickUpRadius;
     [SerializeField] public float dashSpeed;
-    [SerializeField] private float dashDuration;
-    [SerializeField] private float dashCooldown;
+    [SerializeField] public float dashDuration;
+    [SerializeField] public float dashCooldown;
 
     public PlayerBaseState currentState { get; private set; }
 
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public PlayerBaseState idleState = new IdleState();
     public PlayerBaseState movingState = new MovingState();
     public PlayerBaseState jumpState = new JumpState();
+    public PlayerBaseState dashState = new DashState();
+    public PlayerBaseState fallingState = new FallingState();
 
     public float movementInput;
     public bool jumpInput = false;
@@ -27,8 +31,8 @@ public class PlayerController : MonoBehaviour
     public bool dashInput = false;
 
     public Actions actions;
-
     public Weapon holding;
+    public CountdownTimer dashCooldownTimer;
 
     public Rigidbody2D rb { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentState = initialState;
         currentState.StartState(this);
+
+        dashCooldownTimer = new CountdownTimer(dashCooldown);
     }
 
     void Update()
@@ -84,17 +90,23 @@ public class PlayerController : MonoBehaviour
 
     public Weapon WeaponWithinRange()
     {
-        Collider2D currentWeapon = Physics2D.CircleCast(coll.bounds.center, pickUpRadius, Vector2.zero, 0f, LayerMask.GetMask("Weapons"))
-            .collider;
-        if (!currentWeapon) return null; 
+        List<Collider2D> weaponsWithinRange = Physics2D.OverlapCircleAll(transform.position, pickUpRadius, LayerMask.GetMask("Weapons")).ToList();
+        if (weaponsWithinRange.Count == 0) return null;
 
+        weaponsWithinRange.Sort((a, b) => {
+            float distanceA = Vector2.Distance(transform.position, a.gameObject.transform.position);
+            float distanceB = Vector2.Distance(transform.position, b.gameObject.transform.position);
+            return distanceA.CompareTo(distanceB);
+        });
 
-        return currentWeapon.gameObject.GetComponent<Weapon>();
+        Collider2D nearestWeapon = weaponsWithinRange[0];
+
+        return nearestWeapon.gameObject.GetComponent<Weapon>();
     }
 
     public void SetFacing(float direction)
     {
-        spriteRenderer.flipX = direction == 1;
+        spriteRenderer.flipX = direction == -1;
     }
 
     public bool IsFacingRight()

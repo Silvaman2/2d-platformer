@@ -72,7 +72,7 @@ public abstract class Weapon : MonoBehaviour
 
         ApplySpread(bullet);
 
-        if(!holder.IsFacingRight())
+        if(holder.IsFacingRight())
         {
             bullet.transform.Rotate(0f, 0f, 180f);
         }
@@ -80,7 +80,7 @@ public abstract class Weapon : MonoBehaviour
 
     public Vector3 getBulletSpawnPoint()
     {
-        return transform.position + new Vector3(bulletOffset.x * -holder.GetFacing(), bulletOffset.y, 0);
+        return transform.position + new Vector3(bulletOffset.x * holder.GetFacing(), bulletOffset.y, 0);
     }
 
     protected float getAttackInterval()

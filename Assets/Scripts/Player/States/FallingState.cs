@@ -2,48 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : PlayerBaseState
+public class FallingState : PlayerBaseState
 {
     public override void StartState(PlayerController player)
     {
-        StopPlayer(player);
         Animations(player);
     }
-
     public override void UpdateState(PlayerController player)
     {
-        if(player.movementInput != 0)
+        if(player.IsGrounded())
         {
-            player.ChangeState(player.movingState);
+            player.ChangeState(player.idleState);
             return;
         }
-
         Actions(player);
     }
-
     public override void FixedUpdateState(PlayerController player)
     {
-
+        player.actions.Walk();
     }
-
     public override void Actions(PlayerController player)
     {
-        player.actions.Jump();
+        player.actions.Dash();
+        player.actions.PickUp();
         player.actions.DropWeapon();
         player.actions.Attack();
-        player.actions.PickUp();
-        player.actions.Fall();
     }
-
     public override void Animations(PlayerController player)
     {
-        player.animator.SetBool("isMoving", false);
-        player.animator.SetBool("isGrounded", true);
-        player.animator.SetBool("isFalling", false);
-    }
-
-    private void StopPlayer(PlayerController player)
-    {
-        player.rb.velocity = new Vector2(0f, player.rb.velocity.y);
+        player.animator.SetBool("isFalling", true);
+        player.animator.SetBool("isGrounded", false);
     }
 }
