@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1232390099
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9ed49b3b5c27ff6488c6185ffd028dd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,6 +180,7 @@ MonoBehaviour:
   weaponHoldOffset: {x: 4.4, y: 0.3}
   weaponGravity: 30
   recoil: 3
+  recoilWearOffRate: 1
   weaponDrag: 0.9
   weaponSprite: {fileID: 21300000, guid: 9ed49b3b5c27ff6488c6185ffd028dd0, type: 3}
   heldWeaponSprite: {fileID: 21300000, guid: 5a69cab4c1dd03848902b26acb2b1939, type: 3}

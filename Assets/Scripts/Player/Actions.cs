@@ -85,7 +85,6 @@ public class Actions
 
     public void Fall()
     {
-        if (player.IsGrounded()) return;
         player.ChangeState(player.fallingState);
     }
 }

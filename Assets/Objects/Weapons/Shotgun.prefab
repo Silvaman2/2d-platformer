@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1232390099
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -104026209, guid: e8eadf084dd3eeb498ca16f87f27228b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,15 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47f364c99d252b4ab20c43ad20dc636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletOffset: {x: 0, y: 0}
+  bulletOffset: {x: 0, y: 1}
   bulletObject: {fileID: 6336762646415742615, guid: 78293e1d3ee7de3449875d5a815cb692, type: 3}
   muzzleFlash: {fileID: 0}
   fireRate: 60
   bulletCount: 8
-  fireSpread: 7
+  fireSpread: 8
   weaponHoldOffset: {x: 4.4, y: 0.3}
   weaponGravity: 30
   recoil: 7
+  recoilWearOffRate: 3
   weaponDrag: 1
   weaponSprite: {fileID: -104026209, guid: e8eadf084dd3eeb498ca16f87f27228b, type: 3}
   heldWeaponSprite: {fileID: 1230328617, guid: e8eadf084dd3eeb498ca16f87f27228b, type: 3}

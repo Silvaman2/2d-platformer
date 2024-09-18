@@ -13,6 +13,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] public Vector2 weaponHoldOffset;
     [SerializeField] public float weaponGravity;
     [SerializeField] public float recoil;
+    [SerializeField] public float recoilWearOffRate;
     [SerializeField] public float weaponDrag;
     [SerializeField] public Sprite weaponSprite;
     [SerializeField] public Sprite heldWeaponSprite;
@@ -101,7 +102,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected void WearOffRecoil()
     {
-        currentRecoil -= recoil / 100;
+        currentRecoil -= (recoil / 100) * recoilWearOffRate;
         currentRecoil = Mathf.Max(currentRecoil, 0);
     }
 

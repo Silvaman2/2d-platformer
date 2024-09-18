@@ -32,7 +32,10 @@ public class IdleState : PlayerBaseState
         player.actions.DropWeapon();
         player.actions.Attack();
         player.actions.PickUp();
-        player.actions.Fall();
+        if(!player.IsGrounded())
+        {
+            player.actions.Fall();
+        }
     }
 
     public override void Animations(PlayerController player)

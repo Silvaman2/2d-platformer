@@ -44,12 +44,12 @@ TagManager:
   - name: Player
     uniqueID: 4114955349
     locked: 0
+  - name: Ground
+    uniqueID: 2394830635
+    locked: 0
   - name: Bullets
     uniqueID: 139153401
     locked: 0
   - name: Weapons
     uniqueID: 3062577197
-    locked: 0
-  - name: Ground
-    uniqueID: 2394830635
     locked: 0

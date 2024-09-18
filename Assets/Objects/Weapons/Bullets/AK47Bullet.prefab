@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 139153401
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1011458988, guid: 58853356567ae6349a26af9d7f4ff88c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -126,8 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d02f8daaf93a34ca99d9fb19257c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelSpeed: 250
+  travelSpeed: 280
   lifeSpanInSeconds: 0.6
+  randomizedLifeSpanOffset: 0.15
+  bulletDeath: {fileID: 619364211316374929, guid: 53745aabcd69c7b4081b20eeb551a741, type: 3}
 --- !u!61 &8899461046587118948
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +137,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533726885769384020}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -157,7 +159,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -171,5 +173,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 22, y: 10}
+  m_Size: {x: 10, y: 5}
   m_EdgeRadius: 0

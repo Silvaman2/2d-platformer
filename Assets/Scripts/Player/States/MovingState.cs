@@ -32,7 +32,10 @@ public class MovingState : PlayerBaseState
         player.actions.Attack();
         player.actions.PickUp();
         player.actions.Dash();
-        player.actions.Fall();
+        if (!player.IsGrounded())
+        {
+            player.actions.Fall();
+        }
     }
 
     public override void Animations(PlayerController player)
