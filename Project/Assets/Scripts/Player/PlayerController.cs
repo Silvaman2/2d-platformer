@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float dashSpeed;
     [SerializeField] public float dashDuration;
     [SerializeField] public float dashCooldown;
+    [SerializeField] public float imagesPerDash;
+    [SerializeField] public DashAfterImage dashAfterImageObject;
     [SerializeField] public RuntimeAnimatorController animationControllerNoHands;
     [SerializeField] public RuntimeAnimatorController animationControllerHands;
 
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public bool dashInput = false;
 
     public Actions actions;
+    public PlayerVisualEffects visualEffects;
     public Weapon holding;
     public CountdownTimer dashCooldownTimer;
 
@@ -48,10 +51,13 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+
         currentState = initialState;
         currentState.StartState(this);
 
         dashCooldownTimer = new CountdownTimer(dashCooldown);
+        visualEffects = new PlayerVisualEffects(this);
+
     }
 
     void Update()

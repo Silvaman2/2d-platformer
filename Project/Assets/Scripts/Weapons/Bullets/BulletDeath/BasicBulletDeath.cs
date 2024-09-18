@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicBulletDeath : MonoBehaviour
+public class BasicBulletDeath : DisposableGameObject
 {
     public void Destroy()
     {
-        Object.Destroy(gameObject);
+        this.Hide();
+    }
+
+    protected override void SummonStart()
+    {
     }
 }

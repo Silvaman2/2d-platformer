@@ -193,12 +193,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8768592e9a6e36444ac503fadfeb5f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 80
+  moveSpeed: 120
   jumpHeight: 300
   pickUpRadius: 50
   dashSpeed: 250
   dashDuration: 0.2
   dashCooldown: 0.6
+  imagesPerDash: 5
+  dashAfterImageObject: {fileID: 1167466757896359126, guid: 0bb7e317539b1f9459721f453d839b47, type: 3}
   animationControllerNoHands: {fileID: 9100000, guid: 5f0dbbfd1b368aa4da00db93faae0352, type: 2}
   animationControllerHands: {fileID: 9100000, guid: c2e4c90f22993084b8bd1827adfd0927, type: 2}
   movementInput: 0

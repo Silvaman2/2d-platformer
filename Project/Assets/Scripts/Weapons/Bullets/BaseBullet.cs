@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseBullet : MonoBehaviour
+public class BaseBullet : DisposableGameObject
 {
     [SerializeField] public float travelSpeed;
     [SerializeField] public float lifeSpanInSeconds;
@@ -12,11 +12,18 @@ public class BaseBullet : MonoBehaviour
     protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
     protected CountdownTimer lifeSpanTimer;
+    protected DisposableGameObject bulletDeathInstance;
 
-    protected void Start()
+    public new void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = rb.GetComponent<SpriteRenderer>();
+        bulletDeathInstance = GameObject.Instantiate(bulletDeath, Weapon.bulletParent).GetComponent<DisposableGameObject>();
+    }
+
+    protected override void SummonStart()
+    {
         LifeSpanCounter();
     }
 
@@ -45,14 +52,19 @@ public class BaseBullet : MonoBehaviour
 
     protected void DestroyBullet()
     {
-        GameObject.Instantiate(bulletDeath, transform.position, Quaternion.identity);
-        GameObject.Destroy(gameObject);
+        bulletDeathInstance.Summon(transform.position, Quaternion.identity);
+        this.Hide();
     }
 
     protected void LifeSpanCounter()
     {
-        float randomOffset = Random.Range(0, randomizedLifeSpanOffset);
+        float randomOffset = GetRandomOffset();
         float resultLifeSpan = lifeSpanInSeconds + randomOffset;
         lifeSpanTimer = new CountdownTimer(resultLifeSpan);
+    }
+
+    protected float GetRandomOffset()
+    {
+        return Random.Range(0, randomizedLifeSpanOffset);
     }
 }

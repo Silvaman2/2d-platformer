@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] Vector2 bulletOffset;
-    [SerializeField] public GameObject bulletObject;
+    [SerializeField] public BaseBullet bulletObject;
     [SerializeField] public Sprite muzzleFlash;
     [SerializeField] public float fireRate;
     [SerializeField] public float bulletCount;
@@ -17,6 +17,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] public float weaponDrag;
     [SerializeField] public Sprite weaponSprite;
     [SerializeField] public Sprite heldWeaponSprite;
+    public static Transform bulletParent { get; private set; }
 
     private Vector2 targetPosition = Vector2.zero;
     public CountdownTimer attackCooldown;
@@ -27,6 +28,7 @@ public abstract class Weapon : MonoBehaviour
     public BoxCollider2D coll { get; private set; }
 
     public PlayerController holder = null;
+    public Queue<BaseBullet> bulletInstanceQueue = new Queue<BaseBullet>();
 
     public BaseWeaponState droppedState = new DroppedState();
     public BaseWeaponState holdingState = new HoldingState();
@@ -42,6 +44,7 @@ public abstract class Weapon : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         ChangeState(droppedState);
+        InstantiateBullets();
     }
 
     protected void Update()
@@ -66,10 +69,39 @@ public abstract class Weapon : MonoBehaviour
         currentState.StartState(this);
     }
 
-    public void SpawnBullet()
+    private void InstantiateBullets()
+    {
+        int instanceCount = GetBulletInstanceCount();
+
+        InitializeBulletParent();
+        for (int i = 0; i < instanceCount; i++)
+        {
+            BaseBullet currentInstance = GameObject.Instantiate(bulletObject.gameObject, bulletParent).GetComponent<BaseBullet>();
+            bulletInstanceQueue.Enqueue(currentInstance);
+        }
+    }
+
+    protected abstract int GetBulletInstanceCount();
+
+    protected int GetBulletInstanceCountRapidFire()
+    {
+        float bulletsSummonedPerSecond = (fireRate / 60f) * bulletCount;
+
+        float bulletTotalPotentialLifeSpan = bulletObject.lifeSpanInSeconds + bulletObject.randomizedLifeSpanOffset;
+
+        float maximumBulletsSummoned = bulletsSummonedPerSecond * bulletTotalPotentialLifeSpan;
+
+        return Mathf.CeilToInt(maximumBulletsSummoned);
+    }
+
+    public void SummonBullet()
     {
         Vector3 bulletSpawnPoint = getBulletSpawnPoint();
-        GameObject bullet = Instantiate(bulletObject, bulletSpawnPoint, Quaternion.identity);
+
+        BaseBullet bullet = bulletInstanceQueue.Dequeue();
+        bulletInstanceQueue.Enqueue(bullet);
+
+        bullet.Summon(bulletSpawnPoint, Quaternion.identity);
 
         ApplySpread(bullet);
 
@@ -106,7 +138,7 @@ public abstract class Weapon : MonoBehaviour
         currentRecoil = Mathf.Max(currentRecoil, 0);
     }
 
-    protected void ApplySpread(GameObject bullet)
+    protected void ApplySpread(BaseBullet bullet)
     {
         float currentSpread = Random.Range(-fireSpread, fireSpread);
         bullet.transform.Rotate(new Vector3(0, 0, currentSpread));
@@ -125,5 +157,11 @@ public abstract class Weapon : MonoBehaviour
     public void ResetGunRotation()
     {
         rb.SetRotation(0f);
+    }
+
+    private void InitializeBulletParent()
+    {
+        if (bulletParent) return;
+        bulletParent = GameObject.Find("Particles").transform;
     }
 }

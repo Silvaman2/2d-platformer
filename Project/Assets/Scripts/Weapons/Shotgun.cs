@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
+    [SerializeField] protected int bulletInstanceCount;
     public override void Attack()
     {
         if (!attackCooldown.hasPassed()) return;
         for (int i = 0; i < bulletCount; i++)
         {
-            SpawnBullet();
+            SummonBullet();
         }
 
         resetAttackCooldown();
         ApplyRecoil();
+    }
+
+    protected override int GetBulletInstanceCount()
+    {
+        return bulletInstanceCount + 1;
     }
 }

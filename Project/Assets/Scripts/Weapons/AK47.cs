@@ -8,8 +8,13 @@ public class AK47 : Weapon
     public override void Attack()
     {
         if (!attackCooldown.hasPassed()) return;
-        SpawnBullet();
+        SummonBullet();
         resetAttackCooldown();
         ApplyRecoil();
+    }
+
+    protected override int GetBulletInstanceCount()
+    {
+        return GetBulletInstanceCountRapidFire();
     }
 }

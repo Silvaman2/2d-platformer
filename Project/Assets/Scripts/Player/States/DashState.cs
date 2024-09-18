@@ -22,6 +22,7 @@ public class DashState : PlayerBaseState
             EnableGravity(player);
             return;
         }
+        player.visualEffects.dashAfterImage.SummonImage();
         Actions(player);
     }
     public override void FixedUpdateState(PlayerController player)

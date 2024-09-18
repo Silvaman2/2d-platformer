@@ -100,20 +100,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletOffset: {x: 0, y: 1}
-  bulletObject: {fileID: 6336762646415742615, guid: 78293e1d3ee7de3449875d5a815cb692, type: 3}
+  bulletObject: {fileID: 2935622558416646495, guid: 78293e1d3ee7de3449875d5a815cb692, type: 3}
   muzzleFlash: {fileID: 0}
   fireRate: 60
   bulletCount: 8
   fireSpread: 8
   weaponHoldOffset: {x: 4.4, y: 0.3}
   weaponGravity: 30
-  recoil: 7
-  recoilWearOffRate: 3
-  weaponDrag: 1
+  recoil: 5
+  recoilWearOffRate: 2.5
+  weaponDrag: 0.8
   weaponSprite: {fileID: -104026209, guid: e8eadf084dd3eeb498ca16f87f27228b, type: 3}
   heldWeaponSprite: {fileID: 1230328617, guid: e8eadf084dd3eeb498ca16f87f27228b, type: 3}
   currentRecoil: 0
   holder: {fileID: 0}
+  bulletInstanceCount: 8
 --- !u!50 &5882643892530860734
 Rigidbody2D:
   serializedVersion: 4
