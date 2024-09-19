@@ -8,25 +8,26 @@ public class DashState : PlayerBaseState
     private float playerGravity;
     public override void StartState(PlayerController player)
     {
-        DisableGravity(player);
+        AdjustGravity(player);
         Animations(player);
         InitializeDurationTimer(player);
+        player.visualEffects.dashAfterImage.ResetAfterImageEffect();
     }
 
     public override void UpdateState(PlayerController player)
     {
-        if(dashDurationTimer.hasPassed())
+        if (dashDurationTimer.hasPassed())
         {
-            player.ChangeState(player.fallingState);
+            player.ChangeState(player.idleState);
             ResetDashCooldown(player);
             EnableGravity(player);
             return;
         }
-        player.visualEffects.dashAfterImage.SummonImage();
         Actions(player);
     }
     public override void FixedUpdateState(PlayerController player)
     {
+        player.visualEffects.dashAfterImage.SummonImage();
         DashMovement(player);
     }
     public override void Actions(PlayerController player)
@@ -54,10 +55,10 @@ public class DashState : PlayerBaseState
         player.dashCooldownTimer = new CountdownTimer(player.dashCooldown);
     }
 
-    private void DisableGravity(PlayerController player)
+    private void AdjustGravity(PlayerController player)
     {
         playerGravity = player.rb.gravityScale;
-        player.rb.gravityScale = 0;
+        player.rb.gravityScale /= 2;
         player.rb.velocity = new Vector2(player.rb.velocity.x, 0f);
     }
 

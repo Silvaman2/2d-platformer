@@ -9,9 +9,12 @@ public class DashAfterImage : DisposableGameObject
 
     private CountdownTimer lifeSpanTimer;
 
+    public SpriteRenderer spriteRenderer { get; private set; }
+
     public new void Start()
     {
         ResetLifeSpanTimer();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         base.Start();
     }
 

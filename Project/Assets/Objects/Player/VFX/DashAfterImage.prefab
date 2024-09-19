@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dc22d2bfeefa24eb4e7ffb49d46ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  afterImageLifeSpan: 0.5
+  afterImageLifeSpan: 0.09
   dashColor: {r: 0.34117648, g: 0.8156863, b: 0.9843137, a: 1}

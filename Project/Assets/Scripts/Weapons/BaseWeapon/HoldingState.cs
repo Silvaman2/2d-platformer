@@ -66,7 +66,10 @@ public class HoldingState : BaseWeaponState
         Vector2 distance = stateManager.holder.transform.position - stateManager.transform.position;
         Vector2 recoilVector = new Vector2(stateManager.currentRecoil * stateManager.holder.GetFacing(), 0);
 
-        Vector2 targetVelocity = (distance / stateManager.weaponDrag) - recoilVector;
+        Vector2 targetVelocity = distance / stateManager.weaponDrag;
+
+        targetVelocity -= recoilVector;
+
         targetPosition = stateManager.transform.position + new Vector3(targetVelocity.x, targetVelocity.y, 0);
     }
 

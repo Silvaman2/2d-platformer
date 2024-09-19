@@ -5,9 +5,9 @@ using UnityEngine;
 public class CountdownTimer
 {
     private float startTime;
-    private float countdownTime;
+    private double countdownTime;
 
-    public CountdownTimer(float seconds)
+    public CountdownTimer(double seconds)
     {
         startTime = Time.time;
         countdownTime = seconds;
@@ -18,5 +18,12 @@ public class CountdownTimer
         float currentTime = Time.time;
         float timePassed = currentTime - startTime;
         return timePassed > countdownTime;
+    }
+
+    public bool hasPassedEqual()
+    {
+        float currentTime = Time.time;
+        float timePassed = currentTime - startTime;
+        return timePassed >= countdownTime;
     }
 }

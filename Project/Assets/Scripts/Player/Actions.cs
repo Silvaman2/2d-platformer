@@ -67,7 +67,7 @@ public class Actions
 
     private bool CanDash()
     {
-        return player.IsMoving() && player.dashInput && player.dashCooldownTimer.hasPassed();
+        return player.dashInput && player.dashCooldownTimer.hasPassed();
     }
 
     public void Move()

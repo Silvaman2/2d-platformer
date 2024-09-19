@@ -15,6 +15,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] public float recoil;
     [SerializeField] public float recoilWearOffRate;
     [SerializeField] public float weaponDrag;
+    [SerializeField] public Vector2 weaponDragLimits;
     [SerializeField] public Sprite weaponSprite;
     [SerializeField] public Sprite heldWeaponSprite;
     public static Transform bulletParent { get; private set; }

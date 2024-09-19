@@ -6,8 +6,8 @@ public class IdleState : PlayerBaseState
 {
     public override void StartState(PlayerController player)
     {
-        StopPlayer(player);
         Animations(player);
+        StopPlayer(player);
     }
 
     public override void UpdateState(PlayerController player)
@@ -19,6 +19,7 @@ public class IdleState : PlayerBaseState
         }
 
         Actions(player);
+        StopPlayer(player);
     }
 
     public override void FixedUpdateState(PlayerController player)
@@ -32,6 +33,7 @@ public class IdleState : PlayerBaseState
         player.actions.DropWeapon();
         player.actions.Attack();
         player.actions.PickUp();
+        player.actions.Dash();
         if(!player.IsGrounded())
         {
             player.actions.Fall();

@@ -7,19 +7,7 @@ public class FollowPlayer : MonoBehaviour
     Vector3 targetPosition;
     [SerializeField] public float cameraDrag;
     [SerializeField] public Vector3 cameraOffset;
-
     [SerializeField] public GameObject player;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     void FixedUpdate()
     {

@@ -7,66 +7,93 @@ public class PlayerDashAfterImage
 {
     private PlayerController player;
     private Queue<DashAfterImage> afterImageQueue = new Queue<DashAfterImage>();
-    private CountdownTimer afterImageCooldown;
+    private float currentImageTransparency;
+    private int currentSortingOrder;
 
     public PlayerDashAfterImage(PlayerController player)
     {
         this.player = player;
-        ResetCooldownTimer();
         InstantiateImages();
     }
 
     public void SummonImage()
     {
-        if (!afterImageCooldown.hasPassed()) return;
-        ResetCooldownTimer();
         DashAfterImage currentImage = afterImageQueue.Dequeue();
         currentImage.Summon(player.transform.position, player.transform.rotation);
+
+        AdjustAfterImageEffect(currentImage);
+
         afterImageQueue.Enqueue(currentImage);
     }
 
     private void InstantiateImages()
     {
-        for (int i = (int) player.imagesPerDash; i > 0; i--)
+        for (int i = 0; i < 20; i++)
         {
             DashAfterImage currentImage = Object.Instantiate(player.dashAfterImageObject);
 
-            InitializeImage(currentImage, i);
+            InitializeColor(currentImage);
 
             afterImageQueue.Enqueue(currentImage);
         }
     }
 
-    private void ResetCooldownTimer()
+    private void InitializeColor(DashAfterImage currentImage)
     {
-        afterImageCooldown = new CountdownTimer(GetTimeBetweenImages());
+        currentImage.spriteRenderer.color = currentImage.dashColor;
     }
 
-    private float GetTimeBetweenImages()
+    private void SetTransparency(DashAfterImage currentImage)
     {
-        return player.dashDuration / player.imagesPerDash;
+        Color currentColor = currentImage.spriteRenderer.color;
+        currentImage.spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, currentImageTransparency);
+
+        IncreaseImageTransparency();
     }
 
-    private void InitializeImage(DashAfterImage currentImage, float imageTransparency)
-    {
-        SpriteRenderer imageRenderer = currentImage.GetComponent<SpriteRenderer>();
-        imageRenderer.sprite = player.spriteRenderer.sprite;
-
-        float currentImageTransparency = (255 / player.imagesPerDash) * imageTransparency;
-
-        InitializeColor(currentImage, imageRenderer);
-        SetTransparency(currentImage, imageRenderer, currentImageTransparency);
+    public void ResetAfterImageEffect()
+    { 
+        ResetImageTransparency();
+        ResetSortingOrder();
     }
 
-    private void InitializeColor(DashAfterImage currentImage, SpriteRenderer imageRenderer)
+    public void AdjustAfterImageEffect(DashAfterImage currentImage)
     {
-        imageRenderer.color = currentImage.dashColor;
+        SetTransparency(currentImage);
+        SetSortingOrder(currentImage);
+        SetSprite(currentImage);
+        SetFacing(currentImage);
     }
 
-    private void SetTransparency(DashAfterImage currentImage, SpriteRenderer imageRenderer, float alpha)
+    public void ResetImageTransparency()
     {
-        Color currentColor = imageRenderer.color;
-        Debug.Log(alpha);
-        imageRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+        currentImageTransparency = 0f;
+    }
+
+    private void IncreaseImageTransparency()
+    {
+        currentImageTransparency += 1 / player.imagesPerDash;
+        currentImageTransparency = Mathf.Min(currentImageTransparency, 0.95f);
+        Debug.Log(currentImageTransparency);
+    }
+
+    public void ResetSortingOrder()
+    {
+        currentSortingOrder = 0;
+    }
+
+    public void SetSortingOrder(DashAfterImage currentImage)
+    {
+        currentImage.spriteRenderer.sortingOrder = currentSortingOrder++;
+    }
+
+    private void SetSprite(DashAfterImage currentImage)
+    {
+        currentImage.spriteRenderer.sprite = player.spriteRenderer.sprite;
+    }
+    
+    private void SetFacing(DashAfterImage currentImage)
+    {
+        currentImage.spriteRenderer.flipX = player.spriteRenderer.flipX;
     }
 }

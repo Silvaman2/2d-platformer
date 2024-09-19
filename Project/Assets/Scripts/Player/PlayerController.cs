@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 1f, LayerMask.GetMask("Ground")).collider;
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size - new Vector3(0.1f, 0), 0f, Vector2.down, 1f, LayerMask.GetMask("Ground")).collider;
     }
 
     public Weapon WeaponWithinRange()
