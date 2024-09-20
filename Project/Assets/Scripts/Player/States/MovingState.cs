@@ -11,14 +11,14 @@ public class MovingState : PlayerBaseState
 
     public override void UpdateState(PlayerController player)
     {
-        if(player.movementInput == 0)
+        if(!player.IsMoving())
         {
             player.ChangeState(player.idleState);
             return;
         }
 
         Actions(player);
-
+        player.SetFacing(player.input.movementInput);
     }
 
     public override void FixedUpdateState(PlayerController player)
@@ -48,7 +48,6 @@ public class MovingState : PlayerBaseState
     private void Walk(PlayerController player)
     {
         player.actions.Move();
-        player.SetFacing(player.movementInput);
     }
 
 

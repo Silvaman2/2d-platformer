@@ -4,19 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float moveSpeed;
+    [SerializeField] public float moveAcceleration;
+    [SerializeField] public float moveDeceleration;
+    [SerializeField] public float moveMaxSpeed;
     [SerializeField] public float jumpHeight;
     [SerializeField] public float pickUpRadius;
     [SerializeField] public float dashSpeed;
     [SerializeField] public float dashDuration;
     [SerializeField] public float dashCooldown;
-    [SerializeField] public float imagesPerDash;
     [SerializeField] public DashAfterImage dashAfterImageObject;
-    [SerializeField] public RuntimeAnimatorController animationControllerNoHands;
-    [SerializeField] public RuntimeAnimatorController animationControllerHands;
 
     public PlayerBaseState currentState { get; private set; }
 
@@ -27,15 +28,10 @@ public class PlayerController : MonoBehaviour
     public PlayerBaseState dashState = new DashState();
     public PlayerBaseState fallingState = new FallingState();
 
-    public float movementInput;
-    public bool jumpInput = false;
-    public bool jumpEndInput = false;
-    public bool actionInput = false;
-    public bool attackInput = false;
-    public bool dropInput = false;
-    public bool dashInput = false;
+    
 
     public Actions actions;
+    public Input input;
     public PlayerVisualEffects visualEffects;
     public Weapon holding;
     public CountdownTimer dashCooldownTimer;
@@ -47,10 +43,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         actions = new Actions(this);
+
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        input = GetComponent<Input>();
 
         currentState = initialState;
         currentState.StartState(this);
@@ -62,7 +60,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        CheckInput();
         currentState.UpdateState(this);
     }
 
@@ -77,20 +74,9 @@ public class PlayerController : MonoBehaviour
         currentState.StartState(this);
     }
 
-    private void CheckInput()
-    {
-        movementInput = Input.GetAxisRaw("Horizontal");
-        jumpInput = Input.GetKeyDown(KeyCode.Z);
-        jumpEndInput = Input.GetKeyUp(KeyCode.Z);
-        actionInput = Input.GetKeyDown(KeyCode.X);
-        attackInput = Input.GetKey(KeyCode.X);
-        dropInput = Input.GetKeyDown(KeyCode.S);
-        dashInput = Input.GetKey(KeyCode.C);
-    }
-
     public bool IsMoving()
     {
-        return movementInput != 0f && rb.velocity.x != 0f;
+        return input.movementInput != 0f && rb.velocity.x != 0f;
     }
 
     public bool IsGrounded()
@@ -116,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetFacing(float direction)
     {
-        spriteRenderer.flipX = direction == -1;
+        spriteRenderer.flipX = direction < 0;
     }
 
     public bool IsFacingRight()

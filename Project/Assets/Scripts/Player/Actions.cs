@@ -18,7 +18,7 @@ public class Actions
 
     private bool CanJump()
     {
-        return player.IsGrounded() && player.jumpInput;
+        return player.IsGrounded() && player.input.jumpInput;
     }
 
     public void PickUp()
@@ -31,7 +31,7 @@ public class Actions
 
     private bool CanPickUp()
     {
-        return !player.holding && player.WeaponWithinRange() && player.actionInput;
+        return !player.holding && player.WeaponWithinRange() && player.input.actionInput;
     }
 
     public void Attack()
@@ -42,7 +42,7 @@ public class Actions
 
     private bool CanAttack()
     {
-        return player.holding && player.attackInput;
+        return player.holding && player.input.attackInput;
     }
 
     public void DropWeapon()
@@ -56,7 +56,7 @@ public class Actions
 
     private bool CanDropWeapon()
     {
-        return player.holding && player.dropInput;
+        return player.holding && player.input.dropInput;
     }
 
     public void Dash()
@@ -67,20 +67,20 @@ public class Actions
 
     private bool CanDash()
     {
-        return player.dashInput && player.dashCooldownTimer.hasPassed();
+        return player.input.dashInput && player.dashCooldownTimer.hasPassed();
     }
 
     public void Move()
     {
         Rigidbody2D rb = player.rb;
-        rb.velocity = new Vector2(player.moveSpeed * player.movementInput, rb.velocity.y);
+        rb.velocity = new Vector2(player.moveSpeed * player.input.movementInput, rb.velocity.y);
     }
 
     public void Walk()
     {
         Move();
-        if (player.movementInput == 0) return;
-        player.SetFacing(player.movementInput);
+        if (player.input.movementInput == 0) return;
+        player.SetFacing(player.input.movementInput);
     }
 
     public void Fall()

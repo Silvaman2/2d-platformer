@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4769359417487930858}
   - component: {fileID: 2145685145077247603}
   - component: {fileID: 2173551458404022308}
+  - component: {fileID: 4234730268935218897}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -121,10 +122,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 70
+  m_GravityScale: 80
   m_Material: {fileID: 6200000, guid: 3da7c4ded3b8c7340bb1948f2db23ec3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -194,15 +195,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 120
-  jumpHeight: 350
+  moveAcceleration: 0
+  moveDeceleration: 0
+  moveMaxSpeed: 0
+  jumpHeight: 310
   pickUpRadius: 50
-  dashSpeed: 250
-  dashDuration: 0.2
-  dashCooldown: 0.6
-  imagesPerDash: 10
+  dashSpeed: 270
+  dashDuration: 0.35
+  dashCooldown: 0.3
   dashAfterImageObject: {fileID: 1167466757896359126, guid: 0bb7e317539b1f9459721f453d839b47, type: 3}
-  animationControllerNoHands: {fileID: 9100000, guid: 5f0dbbfd1b368aa4da00db93faae0352, type: 2}
-  animationControllerHands: {fileID: 9100000, guid: c2e4c90f22993084b8bd1827adfd0927, type: 2}
+  input: {fileID: 4234730268935218897}
+  holding: {fileID: 0}
+--- !u!114 &4234730268935218897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122990726234403775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9531ecc10b9fc4681c8a940a62d103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   movementInput: 0
   jumpInput: 0
   jumpEndInput: 0
@@ -210,4 +225,3 @@ MonoBehaviour:
   attackInput: 0
   dropInput: 0
   dashInput: 0
-  holding: {fileID: 0}

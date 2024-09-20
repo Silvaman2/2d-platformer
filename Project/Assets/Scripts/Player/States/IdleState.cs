@@ -12,7 +12,7 @@ public class IdleState : PlayerBaseState
 
     public override void UpdateState(PlayerController player)
     {
-        if(player.movementInput != 0)
+        if(player.input.movementInput != 0)
         {
             player.ChangeState(player.movingState);
             return;

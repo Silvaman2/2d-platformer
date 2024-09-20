@@ -40,6 +40,7 @@ public class PlayerDashAfterImage
 
     private void InitializeColor(DashAfterImage currentImage)
     {
+        Debug.Log(currentImage.dashColor);
         currentImage.spriteRenderer.color = currentImage.dashColor;
     }
 
@@ -72,7 +73,7 @@ public class PlayerDashAfterImage
 
     private void IncreaseImageTransparency()
     {
-        currentImageTransparency += 1 / player.imagesPerDash;
+        currentImageTransparency += 1f / 13f;
         currentImageTransparency = Mathf.Min(currentImageTransparency, 0.95f);
         Debug.Log(currentImageTransparency);
     }

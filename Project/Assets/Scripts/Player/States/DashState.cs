@@ -66,4 +66,10 @@ public class DashState : PlayerBaseState
     {
         player.rb.gravityScale = playerGravity;
     }
+
+    //use to check if player's dash is interrupted in some way, like hitting a wall.
+    private bool DashInterrupted(PlayerController player)
+    {
+        return true;
+    }
 }

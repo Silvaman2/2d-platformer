@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DisplaySettings : MonoBehaviour
 {
-    [SerializeField] public int framesPerSecond;
+    [SerializeField] int targetFramesPerSecond;
 
     private void Awake()
     {
-        Application.targetFrameRate = framesPerSecond;
+        Application.targetFrameRate = targetFramesPerSecond;
     }
 }

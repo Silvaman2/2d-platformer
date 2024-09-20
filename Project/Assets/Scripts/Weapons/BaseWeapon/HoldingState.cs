@@ -82,6 +82,6 @@ public class HoldingState : BaseWeaponState
     private void CheckInput(Weapon stateManager)
     {
         PlayerController player = stateManager.holder;
-        if (player.actionInput) stateManager.Attack();
+        if (player.input.actionInput) stateManager.Attack();
     }
 }

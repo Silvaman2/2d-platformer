@@ -179,9 +179,10 @@ MonoBehaviour:
   fireSpread: 4
   weaponHoldOffset: {x: 4.4, y: 0.3}
   weaponGravity: 30
-  recoil: 2
-  recoilWearOffRate: 2
+  recoil: 2.5
+  recoilWearOffRate: 3
   weaponDrag: 0.8
+  weaponDragLimits: {x: 0, y: 0}
   weaponSprite: {fileID: 21300000, guid: 9ed49b3b5c27ff6488c6185ffd028dd0, type: 3}
   heldWeaponSprite: {fileID: 21300000, guid: 5a69cab4c1dd03848902b26acb2b1939, type: 3}
   currentRecoil: 0

@@ -107,8 +107,8 @@ MonoBehaviour:
   fireSpread: 8
   weaponHoldOffset: {x: 4.4, y: 0.3}
   weaponGravity: 30
-  recoil: 5
-  recoilWearOffRate: 2.5
+  recoil: 3.5
+  recoilWearOffRate: 1
   weaponDrag: 0.8
   weaponDragLimits: {x: 7, y: 7}
   weaponSprite: {fileID: -104026209, guid: e8eadf084dd3eeb498ca16f87f27228b, type: 3}

@@ -16,10 +16,8 @@ public class JumpState : PlayerBaseState
             player.actions.Fall();
             return;
         }
-
-
-        CutOffJump(player);
         Actions(player);
+        CutOffJump(player);
     }
     public override void FixedUpdateState(PlayerController player)
     {
@@ -51,7 +49,7 @@ public class JumpState : PlayerBaseState
 
     private void CutOffJump(PlayerController player)
     {
-        if (!player.jumpEndInput) return;
+        if (!player.input.jumpEndInput) return;
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y / 2);
     }
 }

@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   afterImageLifeSpan: 0.09
   dashColor: {r: 0.34117648, g: 0.8156863, b: 0.9843137, a: 1}
+  spriteRenderer: {fileID: 4188943267206821803}
