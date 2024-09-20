@@ -11,19 +11,22 @@ public class MovingState : PlayerBaseState
 
     public override void UpdateState(PlayerController player)
     {
-        if(!player.IsMoving())
+        Actions(player);
+        if (!player.IsNewState(this)) return;
+        if (!player.IsMoving())
         {
             player.ChangeState(player.idleState);
             return;
         }
-
-        Actions(player);
         player.SetFacing(player.input.movementInput);
     }
 
     public override void FixedUpdateState(PlayerController player)
     {
         Walk(player);
+    }
+    public override void EndState(PlayerController player)
+    {
     }
     public override void Actions(PlayerController player)
     {
@@ -49,6 +52,4 @@ public class MovingState : PlayerBaseState
     {
         player.actions.Move();
     }
-
-
 }

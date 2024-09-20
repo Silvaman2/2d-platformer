@@ -23,6 +23,11 @@ public class JumpState : PlayerBaseState
     {
         player.actions.Walk();
     }
+
+    public override void EndState(PlayerController player)
+    {
+    }
+
     public override void Actions(PlayerController player)
     {
         player.actions.DropWeapon();
@@ -44,7 +49,7 @@ public class JumpState : PlayerBaseState
 
     private bool IsFalling(PlayerController player)
     {
-        return player.rb.velocity.y <= 0;
+        return player.rb.velocity.y < 0;
     }
 
     private void CutOffJump(PlayerController player)

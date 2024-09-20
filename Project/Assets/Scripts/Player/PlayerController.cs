@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public DashAfterImage dashAfterImageObject;
 
     public PlayerBaseState currentState { get; private set; }
+    public PlayerBaseState newState { get; private set; }
 
     private PlayerBaseState initialState = new IdleState();
     public PlayerBaseState idleState = new IdleState();
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<Input>();
 
         currentState = initialState;
+        newState = initialState;
         currentState.StartState(this);
 
         dashCooldownTimer = new CountdownTimer(dashCooldown);
@@ -60,6 +62,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(!IsCurrentState(newState))
+        {
+            currentState = newState;
+            currentState.StartState(this);
+        }
         currentState.UpdateState(this);
     }
 
@@ -70,8 +77,18 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeState(PlayerBaseState newState)
     {
-        currentState = newState;
-        currentState.StartState(this);
+        this.newState = newState;
+        currentState.EndState(this);
+    }
+
+    public bool IsCurrentState(PlayerBaseState state)
+    {
+        return currentState.Equals(state);
+    }
+
+    public bool IsNewState(PlayerBaseState state)
+    {
+        return newState.Equals(state);
     }
 
     public bool IsMoving()

@@ -21,6 +21,9 @@ public class FallingState : PlayerBaseState
     {
         player.actions.Walk();
     }
+    public override void EndState(PlayerController player)
+    {
+    }
     public override void Actions(PlayerController player)
     {
         player.actions.Dash();

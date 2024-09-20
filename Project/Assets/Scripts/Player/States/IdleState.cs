@@ -12,17 +12,22 @@ public class IdleState : PlayerBaseState
 
     public override void UpdateState(PlayerController player)
     {
-        if(player.input.movementInput != 0)
+        Actions(player);
+        if (!player.IsNewState(this)) return;
+        if (player.input.movementInput != 0)
         {
             player.ChangeState(player.movingState);
             return;
         }
-
-        Actions(player);
         StopPlayer(player);
     }
 
     public override void FixedUpdateState(PlayerController player)
+    {
+
+    }
+
+    public override void EndState(PlayerController player)
     {
 
     }
@@ -51,4 +56,6 @@ public class IdleState : PlayerBaseState
     {
         player.rb.velocity = new Vector2(0f, player.rb.velocity.y);
     }
+
+    
 }
