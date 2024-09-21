@@ -40,7 +40,6 @@ public class PlayerDashAfterImage
 
     private void InitializeColor(DashAfterImage currentImage)
     {
-        Debug.Log(currentImage.dashColor);
         currentImage.spriteRenderer.color = currentImage.dashColor;
     }
 

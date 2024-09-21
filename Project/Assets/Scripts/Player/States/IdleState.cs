@@ -7,7 +7,6 @@ public class IdleState : PlayerBaseState
     public override void StartState(PlayerController player)
     {
         Animations(player);
-        StopPlayer(player);
     }
 
     public override void UpdateState(PlayerController player)
@@ -19,17 +18,15 @@ public class IdleState : PlayerBaseState
             player.ChangeState(player.movingState);
             return;
         }
-        StopPlayer(player);
     }
 
     public override void FixedUpdateState(PlayerController player)
     {
-
+        PhysicsUtils.LerpMovement(player.rb, player.moveDecceleration);
     }
 
     public override void EndState(PlayerController player)
     {
-
     }
 
     public override void Actions(PlayerController player)
@@ -51,11 +48,4 @@ public class IdleState : PlayerBaseState
         player.animator.SetBool("isGrounded", true);
         player.animator.SetBool("isFalling", false);
     }
-
-    private void StopPlayer(PlayerController player)
-    {
-        player.rb.velocity = new Vector2(0f, player.rb.velocity.y);
-    }
-
-    
 }

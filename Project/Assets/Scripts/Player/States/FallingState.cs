@@ -12,14 +12,14 @@ public class FallingState : PlayerBaseState
     {
         if(player.IsGrounded())
         {
-            player.ChangeState(player.idleState);
+            player.actions.Land();
             return;
         }
         Actions(player);
     }
     public override void FixedUpdateState(PlayerController player)
     {
-        player.actions.Walk();
+        player.actions.MoveFacing();
     }
     public override void EndState(PlayerController player)
     {
@@ -27,7 +27,6 @@ public class FallingState : PlayerBaseState
     public override void Actions(PlayerController player)
     {
         player.actions.Dash();
-        player.actions.PickUp();
         player.actions.DropWeapon();
         player.actions.Attack();
     }

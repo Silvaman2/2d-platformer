@@ -72,19 +72,42 @@ public class Actions
 
     public void Move()
     {
-        Rigidbody2D rb = player.rb;
-        rb.velocity = new Vector2(player.moveSpeed * player.input.movementInput, rb.velocity.y);
+        if(player.input.movementInput != 0)
+        {
+            float speedIncrease = player.moveAcceleration * player.input.movementInput;
+            PhysicsUtils.Accelerate(player.rb, speedIncrease, player.moveMaxSpeed);
+
+            if (player.input.movementInput != Mathf.Sign(player.rb.velocity.x)) PhysicsUtils.LerpMovement(player.rb, player.moveDecceleration);
+            return;
+        }
     }
 
-    public void Walk()
+    public void MoveFacing()
     {
         Move();
         if (player.input.movementInput == 0) return;
         player.SetFacing(player.input.movementInput);
     }
 
+    
+
     public void Fall()
     {
         player.ChangeState(player.fallingState);
+    }
+
+    public void Land()
+    {
+        if (player.IsMoving())
+        {
+            player.ChangeState(player.movingState);
+            return;
+        }
+        player.ChangeState(player.idleState);
+    }
+
+    public void StopMovement()
+    {
+        player.rb.velocity = new Vector2(0f, player.rb.velocity.y);
     }
 }

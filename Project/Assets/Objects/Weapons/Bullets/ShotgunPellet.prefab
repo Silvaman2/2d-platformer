@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8513698935468634273}
   - component: {fileID: 2935622558416646495}
   - component: {fileID: 5228079851258484363}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShotgunPellet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c1a79f87b057b40bdcdb463896830b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   travelSpeed: 350
   lifeSpanInSeconds: 0.27
   randomizedLifeSpanOffset: 0.15

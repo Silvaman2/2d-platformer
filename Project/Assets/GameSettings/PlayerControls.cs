@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc5f578d-d8ee-4c62-a9c2-5eed978a5034"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -260,6 +269,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f2b44d9-83b4-496e-a47b-260ba9e1fd8e"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -279,6 +299,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Action = m_Gameplay.FindAction("Action", throwIfNotFound: true);
         m_Gameplay_Drop = m_Gameplay.FindAction("Drop", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_ResetScene = m_Gameplay.FindAction("ResetScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -345,6 +366,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Action;
     private readonly InputAction m_Gameplay_Drop;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_ResetScene;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -354,6 +376,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Action => m_Wrapper.m_Gameplay_Action;
         public InputAction @Drop => m_Wrapper.m_Gameplay_Drop;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @ResetScene => m_Wrapper.m_Gameplay_ResetScene;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -378,6 +401,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @ResetScene.started += instance.OnResetScene;
+            @ResetScene.performed += instance.OnResetScene;
+            @ResetScene.canceled += instance.OnResetScene;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -397,6 +423,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @ResetScene.started -= instance.OnResetScene;
+            @ResetScene.performed -= instance.OnResetScene;
+            @ResetScene.canceled -= instance.OnResetScene;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -430,5 +459,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAction(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnResetScene(InputAction.CallbackContext context);
     }
 }

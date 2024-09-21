@@ -5,12 +5,13 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float moveSpeed;
     [SerializeField] public float moveAcceleration;
-    [SerializeField] public float moveDeceleration;
+    [SerializeField] public float moveDecceleration;
     [SerializeField] public float moveMaxSpeed;
     [SerializeField] public float jumpHeight;
     [SerializeField] public float pickUpRadius;
@@ -68,6 +69,8 @@ public class PlayerController : MonoBehaviour
             currentState.StartState(this);
         }
         currentState.UpdateState(this);
+
+        if (input.resetSceneInput) Application.LoadLevel(Application.loadedLevel);
     }
 
     void FixedUpdate()

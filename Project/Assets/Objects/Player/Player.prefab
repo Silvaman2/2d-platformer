@@ -195,13 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 120
-  moveAcceleration: 0
-  moveDeceleration: 0
-  moveMaxSpeed: 0
+  moveAcceleration: 3700
+  moveDecceleration: 0.3
+  moveMaxSpeed: 120
   jumpHeight: 310
   pickUpRadius: 50
-  dashSpeed: 270
-  dashDuration: 0.35
+  dashSpeed: 280
+  dashDuration: 0.25
   dashCooldown: 0.3
   dashAfterImageObject: {fileID: 1167466757896359126, guid: 0bb7e317539b1f9459721f453d839b47, type: 3}
   input: {fileID: 4234730268935218897}

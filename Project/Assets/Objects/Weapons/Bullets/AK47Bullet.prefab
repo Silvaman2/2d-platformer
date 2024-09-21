@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4572805225582516055}
   - component: {fileID: 2070325803356101108}
   - component: {fileID: 8899461046587118948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AK47Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d02f8daaf93a34ca99d9fb19257c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   travelSpeed: 280
   lifeSpanInSeconds: 0.6
   randomizedLifeSpanOffset: 0.15

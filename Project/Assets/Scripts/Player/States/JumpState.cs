@@ -21,7 +21,7 @@ public class JumpState : PlayerBaseState
     }
     public override void FixedUpdateState(PlayerController player)
     {
-        player.actions.Walk();
+        player.actions.MoveFacing();
     }
 
     public override void EndState(PlayerController player)

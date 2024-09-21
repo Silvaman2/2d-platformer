@@ -14,6 +14,7 @@ public class Input : MonoBehaviour
     public bool attackInput = false;
     public bool dropInput = false;
     public bool dashInput = false;
+    public bool resetSceneInput = false;
 
     public void Start()
     {
@@ -30,5 +31,6 @@ public class Input : MonoBehaviour
         attackInput = controls.Gameplay.Action.IsPressed();
         dropInput = controls.Gameplay.Drop.WasPressedThisFrame();
         dashInput = controls.Gameplay.Dash.WasPressedThisFrame();
+        resetSceneInput = controls.Gameplay.ResetScene.WasPressedThisFrame();
     }
 }

@@ -18,7 +18,7 @@ public class DashState : PlayerBaseState
     {
         if (dashDurationTimer.hasPassed())
         {
-            player.ChangeState(player.idleState);
+            player.ChangeState(player.fallingState);
         }
         Actions(player);
     }
@@ -60,7 +60,7 @@ public class DashState : PlayerBaseState
     private void AdjustGravity(PlayerController player)
     {
         playerGravity = player.rb.gravityScale;
-        player.rb.gravityScale /= 3;
+        player.rb.gravityScale = 0;
         player.rb.velocity = new Vector2(player.rb.velocity.x, 0f);
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseBullet : DisposableGameObject
 {
+    [SerializeField] public int damage;
     [SerializeField] public float travelSpeed;
     [SerializeField] public float lifeSpanInSeconds;
     [SerializeField] public float randomizedLifeSpanOffset;
@@ -35,6 +36,15 @@ public class BaseBullet : DisposableGameObject
     protected void FixedUpdate()
     {
         MoveBulletForward();
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        DestroyBullet();
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Enemy")) return;
+        Enemy target = collision.gameObject.GetComponent<Enemy>();
+
+        target.Damage(damage);
     }
 
 
